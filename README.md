@@ -42,4 +42,4 @@ MIT License
 ## Connect
 
 - **Twitter**: [@S0LARIN](https://x.com/S0LARIN)
-- **Codepen**: [your.email@example.com](https://codepen.io/dotjs)
+- **Codepen**: [@dotjs](https://codepen.io/dotjs)
