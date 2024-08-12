@@ -5,7 +5,7 @@
 *.exe
 *.dll
 *.so
-*.svg
+*.vscode
 
 # Ignore build output directories
 /bin/
