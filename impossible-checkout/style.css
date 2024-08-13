@@ -79,6 +79,7 @@ header button {
   transition: opacity 0.2s ease-in-out;
   display: grid;
   align-items: center;
+  outline: none;
 }
 header button:hover {
   opacity: 1;
@@ -137,13 +138,14 @@ header button:hover {
   overflow: hidden;
   grid-template-columns: 1fr auto;
   padding: 2px;
+  cursor: pointer;
 }
 .product-button button {
+  cursor: pointer;
   border: 1px solid transparent;
   height: clamp(45px, 6vw, 50px);
   font-weight: 500;
-  font-size: clamp(12px, 2vw, 14px);
-  cursor: pointer;
+  font-size: clamp(12px, 2vw, 16px);
   font-family: inherit;
   border-radius: 10rem;
   background-color: rgb(var(--text-color));
@@ -171,7 +173,7 @@ header button:hover {
   background-color: rgb(var(--text-color));
   border-radius: 10rem;
   transition: opacity 0.25s ease-in-out 0.03s, top 0.25s ease-in-out;
-  font-size: 18px;
+  font-size: clamp(18px, 2vw, 20px);
 }
 .product-button .secondary {
   width: clamp(130px, 20vw, 160px);
@@ -180,7 +182,7 @@ header button:hover {
   color: rgb(var(--text-color));
 }
 .product-button:hover button.primary, .product-button.try button.primary {
-  width: clamp(200px, 80vw - 4px, 382px);
+  width: clamp(200px, 80vw - 4px, 396px);
   height: 65px;
 }
 .product-button:hover button.primary::after, .product-button.try button.primary::after {
