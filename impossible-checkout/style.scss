@@ -17,6 +17,10 @@ body {
   background: rgb(var(--bg-color));
   color: rgb(var(--text-color));
   font-family: "Poppins", sans-serif;
+
+  *::selection {
+    background-color: rgba(var(--text-color), 0.2);
+  }
 }
 
 #root {
@@ -34,7 +38,6 @@ body {
   display: grid;
   background-color: rgb(var(--fg-color));
   border-radius: 32px;
-  // border: 2.5px solid rgb(var(--text-color));
   box-shadow: 0 0 0 3px rgba(var(--text-color), 0.15);
   align-content: start;
   padding: 28px;
@@ -50,6 +53,7 @@ body {
 
   &:has(.done) {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -91,6 +95,7 @@ header {
     place-items: center;
 
     img {
+      user-select: none;
       width: 100%;
       aspect-ratio: 16 / 9;
     }
@@ -141,7 +146,6 @@ header {
     padding: 2px;
 
     button {
-      // grid-column: 6fr;
       border: 1px solid transparent;
       height: clamp(45px, 6vw, 50px);
       font-weight: 500;
@@ -240,7 +244,7 @@ header {
 
 @keyframes zoom {
   0% {
-    transform: scale(0.6);
+    transform: scale(0.5);
   }
   100% {
     transform: scale(1);
@@ -258,7 +262,7 @@ header {
 
 @keyframes slide-up {
   0% {
-    transform: translateY(60%);
+    transform: translateY(50%);
   }
   100% {
     transform: translateY(0);

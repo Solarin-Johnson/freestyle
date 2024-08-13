@@ -17,6 +17,12 @@ body {
   color: rgb(var(--text-color));
   font-family: "Poppins", sans-serif;
 }
+body *::-moz-selection {
+  background-color: rgba(var(--text-color), 0.2);
+}
+body *::selection {
+  background-color: rgba(var(--text-color), 0.2);
+}
 
 #root {
   min-height: 100%;
@@ -46,6 +52,7 @@ body {
 }
 .container:has(.done) {
   opacity: 0;
+  visibility: hidden;
 }
 
 header {
@@ -83,6 +90,9 @@ header button:hover {
   place-items: center;
 }
 .product-img img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   width: 100%;
   aspect-ratio: 16/9;
 }
@@ -209,7 +219,7 @@ header button:hover {
 
 @keyframes zoom {
   0% {
-    transform: scale(0.6);
+    transform: scale(0.5);
   }
   100% {
     transform: scale(1);
@@ -225,7 +235,7 @@ header button:hover {
 }
 @keyframes slide-up {
   0% {
-    transform: translateY(60%);
+    transform: translateY(50%);
   }
   100% {
     transform: translateY(0);
