@@ -136,7 +136,6 @@ body {
         transition: 0.3s ease filter;
         position: relative;
         display: grid;
-
         @include gradient-text(var(--text-color));
       }
     }
@@ -147,6 +146,7 @@ body {
     letter-spacing: 0.1px;
   }
   &-cvv {
+    background: none !important;
     span {
       position: relative;
       color: transparent;

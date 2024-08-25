@@ -111,6 +111,9 @@ body > div {
   word-spacing: 2px;
   letter-spacing: 0.1px;
 }
+.card-cvv {
+  background: none !important;
+}
 .card-cvv span {
   position: relative;
   color: transparent;
