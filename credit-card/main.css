@@ -141,9 +141,12 @@ body > div {
   background-color: rgb(var(--bg-color));
   color: rgb(var(--fg-color));
   grid-auto-flow: column;
-  transition: 0.3s ease opacity, 0.3s ease visibility, 0.3s ease transform;
+  transition: 0.35s ease-in, 0.3s ease opacity, 0.3s ease visibility, 0.3s ease transform;
   padding: 1px 8px;
   border-radius: 6px;
+  max-width: 40px;
+  justify-content: center;
+  overflow: hidden;
   cursor: pointer;
   transform: scale(0.8);
   opacity: 0;
@@ -160,10 +163,21 @@ body > div {
   width: 12px;
 }
 .pop svg {
+  transition: 0.45s ease, 0.2s ease opacity;
   width: 12px;
 }
+.pop.expanded {
+  max-width: 80px;
+}
+.pop.expanded svg:last-child {
+  opacity: 1;
+  transform: translateX(-100%);
+}
+.pop.expanded svg:first-child {
+  opacity: 0;
+}
 
-@media (max-width: 768px) {
+@media (max-width: 540px) {
   .card {
     transform: scale(0.85);
     transform-origin: center;

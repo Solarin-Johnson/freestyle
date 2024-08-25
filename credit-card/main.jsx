@@ -18,11 +18,11 @@ const CardName = ({ value, className, children }) => {
     const handleMouseOut = (e) => {
       setTimeout(() => {
         setCopied(false);
-      }, 300);
+        containerRef.current.lastChild.classList.remove("expanded");
+      }, 50);
     };
 
     const container = containerRef.current;
-
     container.addEventListener("mouseleave", handleMouseOut);
 
     return () => {
@@ -30,16 +30,18 @@ const CardName = ({ value, className, children }) => {
     };
   }, []);
 
+  const copyText = () => {
+    copyToClipboard(value);
+    setTimeout(() => {
+      setCopied(true);
+    }, 150);
+    containerRef.current.lastChild.classList.add("expanded");
+  };
+
   return (
     <div ref={containerRef}>
       <label className={className}>{children ? children : value}</label>
-      <div
-        className="pop"
-        onClick={() => {
-          copyToClipboard(value);
-          setCopied(true);
-        }}
-      >
+      <div className="pop" onClick={copyText}>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
