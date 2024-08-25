@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
+:root {
+  --bg-color: 250, 250, 250;
+  --text-color: 231, 231, 231;
+  --fg-color: 55, 55, 55;
+  color-scheme: light dark;
+}
+
+html,
+body {
+  margin: 0;
+  background: rgb(var(--bg-color));
+  color: rgb(var(--text-color));
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, rgba(var(--fg-color)) 1.2px, transparent 1px), linear-gradient(to bottom, rgba(var(--fg-color)) 1.2px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center -2px;
+  position: relative;
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(165deg, rgba(var(--bg-color), 0.1), rgba(var(--bg-color)) 40%, rgb(var(--bg-color)));
+}
+body > div {
+  z-index: 1;
+}
+
+#root {
+  min-height: 100dvh;
+  display: grid;
+}
+
+.card {
+  z-index: 1;
+  align-self: center;
+  justify-self: center;
+  border-radius: 14px;
+  width: calc(95% - 48px);
+  max-width: 350px;
+  padding: 24px;
+  background-color: rgb(var(--fg-color));
+  display: grid;
+  row-gap: clamp(85px, 20vw, 100px);
+  align-content: start;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.card-head {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+.card-head svg {
+  -webkit-mask-image: linear-gradient(to top, transparent -15%, #000000 60%, #000);
+          mask-image: linear-gradient(to top, transparent -15%, #000000 60%, #000);
+  height: 28px;
+}
+.card-head svg:first-child {
+  width: 28px;
+}
+.card-head svg:last-child {
+  width: 45px;
+}
+.card-body {
+  display: grid;
+  row-gap: 4px;
+}
+.card-body section {
+  font-weight: 550;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  font-size: 19px;
+}
+.card-body section > div {
+  position: relative;
+  display: grid;
+}
+.card-body section > div:hover > label {
+  position: relative;
+  filter: blur(2px);
+}
+.card-body section > div:hover > label + .pop {
+  transition-delay: 0.05s;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(0.9);
+}
+.card-body section > div > label {
+  padding: 4px 0;
+  cursor: default;
+  transition: 0.3s ease filter;
+  position: relative;
+  display: grid;
+  background: linear-gradient(to bottom, rgb(var(--text-color)) 50%, rgba(var(--text-color), 0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.card-number {
+  word-spacing: 2px;
+  letter-spacing: 0.1px;
+}
+.card-cvv span {
+  position: relative;
+  color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.card-cvv span::before {
+  position: absolute;
+  content: attr(data-text);
+  font-weight: 200;
+  letter-spacing: -1px;
+  background: linear-gradient(to bottom, rgb(var(--text-color)) 50%, rgba(var(--text-color), 0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: rgb(var(--text-color));
+  top: 0;
+  right: 0;
+}
+
+.pop {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  align-items: center;
+  -moz-column-gap: 4px;
+       column-gap: 4px;
+  background-color: rgb(var(--bg-color));
+  color: rgb(var(--fg-color));
+  grid-auto-flow: column;
+  transition: 0.3s ease opacity, 0.3s ease visibility, 0.3s ease transform;
+  padding: 1px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transform: scale(0.8);
+  opacity: 0;
+  visibility: hidden;
+}
+.pop span {
+  font-size: 12px;
+  font-weight: 600;
+}
+.pop > div {
+  display: grid;
+  grid-auto-flow: column;
+  overflow: hidden;
+  width: 12px;
+}
+.pop svg {
+  width: 12px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    transform: scale(0.85);
+    transform-origin: center;
+  }
+}/*# sourceMappingURL=main.css.map */

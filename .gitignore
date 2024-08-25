@@ -6,7 +6,7 @@ idea
 *.dll
 *.so
 *.vscode
-*.css.map
+*.map
 
 # Ignore build output directories
 /bin/
