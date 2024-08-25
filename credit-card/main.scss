@@ -112,6 +112,7 @@ body {
   &-body {
     display: grid;
     row-gap: 4px;
+    text-transform: capitalize;
 
     section {
       font-weight: 550;

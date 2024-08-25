@@ -74,6 +74,7 @@ body > div {
 .card-body {
   display: grid;
   row-gap: 4px;
+  text-transform: capitalize;
 }
 .card-body section {
   font-weight: 550;
