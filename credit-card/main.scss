@@ -151,6 +151,16 @@ body {
       position: relative;
       color: transparent;
       user-select: none;
+      &::after {
+        content: "CVV";
+        position: absolute;
+        width: max-content;
+        top: -2px;
+        right: 1.5px;
+        font-size: 7.5px;
+        @include gradient-text(var(--text-color));
+        color: rgb(var(--text-color));
+      }
       &::before {
         position: absolute;
         content: attr(data-text);
