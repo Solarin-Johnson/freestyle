@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Follow Span</title>
+    <link rel="stylesheet" href="style.css" />
+    <style></style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="content">
+        <!-- <p>
+          My Name
+          <span class="follow-span"></span>
+        </p> -->
+
+        <svg height="200">
+          <defs>
+            <clipPath id="rect-clip">
+              <ellipse id="clipped" cx="0" cy="0" rx="290" ry="290" />
+            </clipPath>
+          </defs>
+          <text
+            x="50%"
+            y="55%"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            font-size="120"
+            font-weight="600"
+            clip-path="url(#rect-clip)"
+          >
+            Solarin.js
+          </text>
+          <ellipse
+            id="feather"
+            cx="0"
+            cy="0"
+            fill="url(#a)"
+            rx="300"
+            ry="300"
+          />
+          <defs>
+            <radialGradient id="a" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="transparent" />
+              <stop offset="20%" stop-color="transparent" />
+              <stop offset="80%" stop-color="rgb(var(--bg-color), 0.9)" />
+              <stop offset="100%" stop-color="rgb(var(--bg-color))" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <script>
+      const followClipped = document.querySelector("#clipped");
+      const followFeather = document.querySelector("#feather");
+      const followSpanWidth = followClipped.getAttribute("rx");
+      const followSpanHeight = followClipped.getAttribute("ry");
+      let isHovered = false;
+
+      const svgElement = document.querySelector("svg");
+
+      svgElement.addEventListener("mouseenter", () => {
+        isHovered = true;
+      });
+
+      svgElement.addEventListener("mouseleave", () => {
+        isHovered = false;
+        // followClipped.style.transform = "scale(0)";
+        // followFeather.style.transform = "scale(0)";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isHovered) return;
+
+        const initialX = followSpanWidth / 2;
+        const initialY = followSpanHeight / 2;
+
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        console.log(initialX, initialY, mouseX, mouseY);
+        // followClipped.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        // followFeather.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        followClipped.setAttribute("cx", mouseX);
+        followClipped.setAttribute("cy", mouseY);
+        followFeather.setAttribute("cx", mouseX);
+        followFeather.setAttribute("cy", mouseY);
+      });
+    </script>
+  </body>
+</html>
