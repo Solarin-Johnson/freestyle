@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Follow Span</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div class="content">
+        <svg>
+          <defs>
+            <clipPath id="rect-clip">
+              <ellipse id="clipped" cx="0" cy="0" rx="190" ry="390"></ellipse>
+            </clipPath>
+            <radialGradient id="a" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+              <stop
+                offset="0%"
+                stop-color="rgb(var(--bg-color))"
+                stop-opacity="0"
+              ></stop>
+              <stop
+                offset="20%"
+                stop-color="rgb(var(--bg-color))"
+                stop-opacity="0"
+              ></stop>
+              <stop offset="80%" stop-color="rgba(var(--bg-color), 0.8)"></stop>
+              <stop offset="95%" stop-color="rgb(var(--bg-color))"></stop>
+            </radialGradient>
+          </defs>
+          <text
+            x="50%"
+            y="55%"
+            id="text"
+            text-anchor="middle"
+            dominant-baseline="baseline"
+            font-size="clamp(2rem, 15vw, 120px)"
+            font-weight="600"
+            clip-path="url(#rect-clip)"
+          >
+            Solarin.js
+          </text>
+          <ellipse
+            id="feather"
+            cx="0"
+            cy="0"
+            fill="url(#a)"
+            rx="200"
+            ry="400"
+          ></ellipse>
+        </svg>
+        <div class="bar">
+          <div class="toogle">
+            <input type="checkbox" id="switch" />
+            <label for="switch"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const followClipped = document.querySelector("#clipped");
+      const followFeather = document.querySelector("#feather");
+      const switchBtn = document.querySelector("#switch");
+      const text = document.querySelector("#text");
+      const svgElement = document.querySelector("svg");
+      let isOn = false,
+        isHovered = false;
+
+      switchBtn.addEventListener("change", () => {
+        isOn = switchBtn.checked;
+        text.setAttribute("clip-path", isOn ? "none" : "url(#rect-clip)");
+        svgElement.classList.toggle("on", isOn);
+      });
+
+      svgElement.addEventListener("mouseenter", () => (isHovered = true));
+      svgElement.addEventListener("mouseleave", () => (isHovered = false));
+
+      svgElement.addEventListener("mousemove", (e) => {
+        if (isOn) return;
+        [followClipped, followFeather].forEach((el) => {
+          el.setAttribute("cx", e.clientX);
+          el.setAttribute("cy", e.clientY);
+        });
+      });
+    </script>
+  </body>
+</html>
