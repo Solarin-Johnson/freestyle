@@ -48,6 +48,8 @@ svg {
   }
 
   &.on {
+    animation: blur-out 0.9s forwards;
+    animation-timing-function: cubic-bezier(0.8, 0.05, 0.265, 1.225);
     #feather {
       display: none;
     }
@@ -76,8 +78,8 @@ svg {
 
     &::after {
       opacity: 0.8;
-      margin-left: 100%;
-      transform: translateX(-100%);
+      margin-left: 50%;
+      transform: translateX(0%);
     }
   }
 
@@ -87,7 +89,7 @@ svg {
     width: 65px;
     padding: 4px;
     border-radius: 10rem;
-    transition: 0.3s ease;
+    transition: 0.3s cubic-bezier(0.8, 0.05, 0.265, 1.225);
     background: rgba(var(--fg-color), 0.8);
     box-sizing: border-box;
 
@@ -101,6 +103,15 @@ svg {
       opacity: 0.4;
       transition: inherit;
     }
+  }
+}
+
+@keyframes blur-out {
+  from {
+    filter: blur(5px) opacity(0);
+  }
+  to {
+    filter: none;
   }
 }
 
