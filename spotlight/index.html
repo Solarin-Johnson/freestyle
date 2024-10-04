@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mouse Follow Span</title>
+    <title>Spotlight</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -52,7 +52,7 @@
         </svg>
         <div class="bar">
           <div class="toogle">
-            <input type="checkbox" id="switch" />
+            <input type="checkbox" id="switch" checked />
             <label for="switch"></label>
           </div>
         </div>
@@ -64,13 +64,21 @@
       const switchBtn = document.querySelector("#switch");
       const text = document.querySelector("#text");
       const svgElement = document.querySelector("svg");
-      let isOn = false,
+      let isOn = true,
         isHovered = false;
 
-      switchBtn.addEventListener("change", () => {
+      const toggleLight = () => {
         isOn = switchBtn.checked;
         text.setAttribute("clip-path", isOn ? "none" : "url(#rect-clip)");
         svgElement.classList.toggle("on", isOn);
+      };
+
+      window.onload = () => {
+        toggleLight();
+      };
+
+      switchBtn.addEventListener("change", () => {
+        toggleLight();
       });
 
       svgElement.addEventListener("mouseenter", () => (isHovered = true));
