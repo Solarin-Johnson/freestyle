@@ -36,9 +36,11 @@ svg {
     opacity: 0;
   }
 
-  &:hover > *,
-  &.on > * {
-    opacity: 1;
+  &:hover,
+  &.on {
+    & > * {
+      opacity: 1;
+    }
   }
 
   text {
@@ -60,11 +62,10 @@ svg {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: clamp(150px, 25vh, 5000px);
+  height: clamp(80px, 30vh, 250px);
   display: grid;
   align-content: center;
   justify-content: center;
-  background: rgb(var(--bg-color));
 
   input {
     visibility: hidden;
