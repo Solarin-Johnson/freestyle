@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
 :root {
   --bg: 244, 236, 222;
   --fg: 255, 255, 255;
@@ -8,7 +10,9 @@
   --col: repeat(2, 1fr);
   --list-col: auto 1fr;
   --tAlign: left;
-  --card-bg: 229, 213, 185;
+  --primary-100: 229, 213, 185;
+  --primary-200: 217, 193, 152;
+  --primary-300: 90, 68, 45;
   --shadow-cord: 0 4px 8px;
 }
 
@@ -28,7 +32,7 @@ body {
 }
 
 #serif {
-  font-family: "Playfair Display", serif;
+  font-family: "Crimson Text", serif;
 }
 
 .container {
@@ -182,7 +186,7 @@ body {
   border: 2px solid rgb(var(--fg));
   padding: 8px;
   border-radius: 10rem;
-  background-color: rgb(var(--card-bg));
+  background-color: rgb(var(--primary-100));
   bottom: 0;
   display: flex;
   align-items: center;
@@ -216,7 +220,10 @@ body {
 .quote {
   position: relative;
   aspect-ratio: 4/5;
-  height: clamp(360px, 45vw, 420px);
+  height: clamp(320px, 45vw, 370px);
+}
+.quote:has(#ex) .quote-card {
+  transition-delay: 0.57s;
 }
 .quote-card {
   display: grid;
@@ -224,21 +231,73 @@ body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 24px;
-  background-color: rgb(var(--card-bg));
+  padding: 16px;
+  background-color: rgb(var(--primary-100));
   z-index: var(--z);
   transform: rotate(var(--rotate));
   border: 2px solid rgb(var(--fg));
   border-radius: 24px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-  transition-delay: 0.57s;
+  align-content: start;
+  justify-items: start;
+  row-gap: 20px;
+  grid-template-rows: auto auto 1fr;
 }
 .quote-card.hide {
   opacity: 0;
 }
 .quote-card#ex {
   animation: swapToBehind 0.75s ease-in-out !important;
+}
+.quote-card-tag {
+  font-size: clamp(10px, 1vw, 12px);
+  font-weight: 500;
+  color: rgba(var(--text), 0.7);
+  padding: 5px 10px;
+  border-radius: 10rem;
+  background-color: rgb(var(--primary-200));
+  color: rgb(var(--primary-300));
+  text-transform: capitalize;
+  will-change: none;
+}
+.quote-card-body {
+  display: grid;
+  font-weight: 600;
+  line-height: 1.4;
+  font-size: clamp(18px, 2vw, 20px);
+}
+.quote-card-footer {
+  align-self: last baseline;
+  display: grid;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  align-items: center;
+  grid-auto-flow: column;
+}
+.quote-card-footer img {
+  border: 2px solid rgb(var(--fg));
+  width: 28px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+.quote-card-author {
+  color: rgba(var(--text), 0.7);
+  font-weight: 500;
+  font-size: clamp(13px, 1.5vw, 15px);
+}
+.quote-indicator {
+  position: relative;
+  background-color: red;
+  width: 100%;
+}
+.quote-indicator svg {
+  opacity: 0.5;
+  left: -32%;
+  top: -50px;
+  position: absolute;
+  z-index: 1000;
+  scale: 0.65;
 }
 
 @keyframes swapToBehind {
