@@ -288,16 +288,16 @@ body {
 }
 .quote-indicator {
   position: relative;
-  background-color: red;
   width: 100%;
 }
-.quote-indicator svg {
+.quote-indicator img {
   opacity: 0.5;
   left: -32%;
   top: -95px;
   position: absolute;
   z-index: 1000;
   scale: 0.65;
+  width: 214px;
 }
 
 @keyframes swapToBehind {
