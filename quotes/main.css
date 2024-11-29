@@ -182,9 +182,9 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 .quotes button {
-  margin-top: 60px;
   border: 2px solid rgb(var(--fg));
-  padding: 8px;
+  padding: 7px;
+  translate: 0 50px;
   border-radius: 10rem;
   bottom: 0;
   display: flex;
@@ -194,7 +194,7 @@ body {
   transition: 0.2s ease-in-out;
   box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07), inset 0 0 8px rgba(0, 0, 0, 0.05);
   background-color: rgba(var(--primary-100), 0.4);
-  will-change: transform, box-shadow;
+  will-change: box-shadow;
 }
 .quotes button:hover {
   background-color: rgb(var(--primary-100));
@@ -206,7 +206,8 @@ body {
   line-height: 2;
   font-weight: 500;
   font-family: inherit;
-  padding: 0 10px;
+  padding: 0 12px;
+  will-change: none;
 }
 .quotes button svg {
   width: 18px;
@@ -291,7 +292,7 @@ body {
   width: 100%;
 }
 .quote-indicator img {
-  opacity: 0.5;
+  opacity: 0.55;
   left: -32%;
   top: -95px;
   position: absolute;
@@ -325,5 +326,9 @@ body {
   }
   .quote-indicator {
     margin-top: 45px;
+  }
+  .quotes button {
+    margin-top: 60px;
+    translate: 0;
   }
 }/*# sourceMappingURL=main.css.map */
