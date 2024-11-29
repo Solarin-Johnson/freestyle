@@ -20,8 +20,69 @@ const quotes = [
     author: "Martin Luther King Jr.",
     dp: "https://randomuser.me/api/portraits/thumb/men/3.jpg",
   },
+  {
+    tag: "motivation",
+    body: "Your time is limited, don't waste it living someone else's life.",
+    author: "Steve Jobs",
+    dp: "https://randomuser.me/api/portraits/thumb/women/4.jpg",
+  },
+  {
+    tag: "happiness",
+    body: "Happiness is not something ready made. It comes from your own actions.",
+    author: "Dalai Lama",
+    dp: "https://randomuser.me/api/portraits/thumb/women/5.jpg",
+  },
+  {
+    tag: "success",
+    body: "Success is not the key to happiness. Happiness is the key to success.",
+    author: "Albert Schweitzer",
+    dp: "https://randomuser.me/api/portraits/thumb/women/6.jpg",
+  },
+  {
+    tag: "perseverance",
+    body: "It does not matter how slowly you go as long as you do not stop.",
+    author: "Confucius",
+    dp: "https://randomuser.me/api/portraits/thumb/men/7.jpg",
+  },
+  {
+    tag: "dreams",
+    body: "The future belongs to those who believe in the beauty of their dreams.",
+    author: "Eleanor Roosevelt",
+    dp: "https://randomuser.me/api/portraits/thumb/men/8.jpg",
+  },
+  {
+    tag: "courage",
+    body: "Courage is not the absence of fear, but the triumph over it.",
+    author: "Nelson Mandela",
+    dp: "https://randomuser.me/api/portraits/thumb/men/9.jpg",
+  },
+  {
+    tag: "kindness",
+    body: "No act of kindness, no matter how small, is ever wasted.",
+    author: "Aesop",
+    dp: "https://randomuser.me/api/portraits/thumb/women/10.jpg",
+  },
 ];
 
+const ArrowIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-arrow-right"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  );
+};
 const SearchIcon = () => {
   return (
     <svg
@@ -86,9 +147,16 @@ const Body = () => {
   );
 };
 
-const QuoteCard = ({ tag, body, dp, author }) => {
+const QuoteCard = ({ index, ex, max, hide, tag, body, dp, author }) => {
   return (
-    <div className="quote-card">
+    <div
+      className={`quote-card ${hide ? "hide" : ""}`}
+      id={ex ? "ex" : ""}
+      style={{
+        "--z": index,
+        "--rotate": `${index === max - 1 ? 0 : index <= max - 3 ? 8 : 4}deg`,
+      }}
+    >
       <div className="quote-card-tag">{tag}</div>
       <div className="quote-card-body">
         <div className="quote-card-body-text">{body}</div>
@@ -107,9 +175,10 @@ const Quotes = () => {
   const [config, setConfig] = useState({
     length: 3,
   });
+  const [current, setCurrent] = useState(null);
 
   function setupTweakpane() {
-    const pane = new Tweakpane.Pane({ title: "Config", expanded: false });
+    const pane = new Tweakpane.Pane({ title: "Config", expanded: true });
     pane
       .addInput(config, "length", { label: "Length", step: 1, min: 3, max: 10 })
       .on("change", ({ value }) => {
@@ -121,9 +190,33 @@ const Quotes = () => {
     setupTweakpane();
   }, []);
 
+  useEffect(() => {
+    setCurrent(0);
+  }, [config.length]);
+
   return (
     <div className="quotes">
-      <h2>Quotes {config.length}</h2>
+      {/* <h2>Quotes {config.length}</h2> */}
+      <div className="quote">
+        {quotes.slice(0, config.length).map((quote, i) => {
+          let index = (current + config.length - i - 1) % config.length;
+
+          return (
+            <QuoteCard
+              key={i}
+              {...quote}
+              index={index}
+              max={config.length}
+              ex={current && !index}
+              hide={index < config.length - 3}
+            />
+          );
+        })}
+      </div>
+      <button onClick={() => setCurrent((prev) => prev + 1)}>
+        <span>Next</span>
+        <ArrowIcon />
+      </button>
     </div>
   );
 };

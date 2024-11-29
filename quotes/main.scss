@@ -9,6 +9,8 @@
   --col: repeat(2, 1fr);
   --list-col: auto 1fr;
   --tAlign: left;
+  --card-bg: 229, 213, 185;
+  --shadow-cord: 0 4px 8px;
 }
 
 html,
@@ -16,10 +18,14 @@ body {
   background-color: rgb(var(--bg));
   font-family: "Inter", sans-serif;
   margin: 0;
+  overflow-x: hidden;
 }
 
 #root {
   display: grid;
+  padding: 80px 0;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 #serif {
@@ -28,8 +34,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1680px;
-  min-height: 100vh;
+  max-width: 1540px;
   padding: var(--gap);
   box-sizing: border-box;
   justify-self: center;
@@ -37,10 +42,12 @@ body {
   display: grid;
   align-content: center;
   gap: var(--gap);
+  row-gap: clamp(4rem, 10vw, 5rem);
   grid-template-columns: var(--col);
 }
 
 .body {
+  align-content: start;
   justify-self: var(--tAlign);
   text-align: var(--tAlign);
   display: grid;
@@ -81,14 +88,14 @@ body {
       border-radius: 14px;
       padding: 10px;
       height: 34px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+      box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
       transition: box-shadow 0.2s ease-in-out;
 
       &:focus-within {
         box-shadow: 0 4.5px 8px rgba(0, 0, 0, 0.11);
       }
 
-      svg {
+      i {
         width: 20px;
         height: 20px;
         padding: clamp(0px, 0.3vw, 4px);
@@ -164,7 +171,7 @@ body {
           margin-left: -12px;
         }
         img {
-          width: clamp(32px, 4vw, 36px);
+          width: clamp(34px, 4vw, 38px);
           aspect-ratio: 1;
         }
       }
@@ -175,6 +182,97 @@ body {
 .quotes {
   justify-content: center;
   display: grid;
+  justify-items: center;
+  align-content: start;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 60px;
+
+  button {
+    border: 2px solid rgb(var(--fg));
+    padding: 8px;
+    border-radius: 10rem;
+    background-color: rgb(var(--card-bg));
+    // position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
+    will-change: transform, box-shadow;
+
+    &:hover {
+      box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    span {
+      line-height: 2;
+      font-weight: 500;
+      font-family: inherit;
+      padding: 0 10px;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      padding: 4px;
+      background-color: rgb(var(--fg));
+      border-radius: 50%;
+      box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
+    }
+  }
+}
+.quote {
+  position: relative;
+  aspect-ratio: 4/5;
+  height: clamp(360px, 45vw, 420px);
+  &-card {
+    display: grid;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    background-color: rgb(var(--card-bg));
+    z-index: var(--z);
+    transform: rotate(var(--rotate));
+    border: 2px solid rgb(var(--fg));
+    border-radius: 24px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    transition-delay: 0.57s;
+
+    &.hide {
+      opacity: 0;
+    }
+
+    &#ex {
+      animation: swapToBehind 0.75s ease-in-out !important;
+    }
+  }
+}
+
+@keyframes swapToBehind {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 1000;
+  }
+  50% {
+    transform: translateX(90%) scale(0.7) rotate(var(--rotate));
+    rotate: 2deg;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(var(--rotate));
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 860px) {
