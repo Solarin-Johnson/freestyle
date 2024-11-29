@@ -186,18 +186,18 @@ body {
   border: 2px solid rgb(var(--fg));
   padding: 8px;
   border-radius: 10rem;
-  background-color: rgb(var(--primary-100));
   bottom: 0;
   display: flex;
   align-items: center;
   justify-items: center;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07), inset 0 0 8px rgba(0, 0, 0, 0.05);
+  background-color: rgba(var(--primary-100), 0.4);
   will-change: transform, box-shadow;
 }
 .quotes button:hover {
-  box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.1);
+  background-color: rgb(var(--primary-100));
 }
 .quotes button:active {
   transform: scale(0.95);
@@ -214,7 +214,7 @@ body {
   padding: 4px;
   background-color: rgb(var(--fg));
   border-radius: 50%;
-  box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.05);
 }
 
 .quote {

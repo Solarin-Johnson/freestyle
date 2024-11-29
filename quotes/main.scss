@@ -195,7 +195,6 @@ body {
     border: 2px solid rgb(var(--fg));
     padding: 8px;
     border-radius: 10rem;
-    background-color: rgb(var(--primary-100));
     // position: absolute;
     bottom: 0;
     display: flex;
@@ -203,11 +202,13 @@ body {
     justify-items: center;
     cursor: pointer;
     transition: 0.2s ease-in-out;
-    box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
+    box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07),
+      inset 0 0 8px rgba(0, 0, 0, 0.05);
+    background-color: rgba(var(--primary-100), 0.4);
     will-change: transform, box-shadow;
 
     &:hover {
-      box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.1);
+      background-color: rgb(var(--primary-100));
     }
 
     &:active {
@@ -227,10 +228,11 @@ body {
       padding: 4px;
       background-color: rgb(var(--fg));
       border-radius: 50%;
-      box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.07);
+      box-shadow: var(--shadow-cord) rgba(0, 0, 0, 0.05);
     }
   }
 }
+
 .quote {
   position: relative;
   aspect-ratio: 4/5;
