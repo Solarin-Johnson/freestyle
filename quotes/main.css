@@ -180,9 +180,9 @@ body {
   justify-items: center;
   align-content: start;
   grid-template-rows: auto 1fr auto;
-  row-gap: 60px;
 }
 .quotes button {
+  margin-top: 60px;
   border: 2px solid rgb(var(--fg));
   padding: 8px;
   border-radius: 10rem;
@@ -294,7 +294,7 @@ body {
 .quote-indicator svg {
   opacity: 0.5;
   left: -32%;
-  top: -50px;
+  top: -95px;
   position: absolute;
   z-index: 1000;
   scale: 0.65;
@@ -322,5 +322,8 @@ body {
     --tAlign: center;
     --col: 1fr;
     --list-col: 1fr;
+  }
+  .quote-indicator {
+    margin-top: 45px;
   }
 }/*# sourceMappingURL=main.css.map */
