@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Emoji:wght@300..700&display=swap");
+:root {
+  interpolate-size: allow-keywords;
+  --text: light-dark(#000000, #ffffff);
+  --text-fade: light-dark(#00000030, #ffffff15);
+  --btn-bg: light-dark(#ebebeb, #2b2b2b);
+  --bg: light-dark(#ffffff, #121212);
+  --bg-fade: light-dark(#ffffff90, #12121290);
+  color-scheme: light dark;
+}
+body {
+  margin: 0;
+  height: 100dvh;
+  align-content: center;
+  justify-items: center;
+  width: 100vw;
+  cursor: default !important;
+  background-color: var(--bg);
+  background: linear-gradient(to right, var(--btn-bg) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--btn-bg) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(
+      165deg,
+      transparent,
+      var(--bg-fade) 90%,
+      var(--bg)
+    );
+  }
+}
+
+.container {
+  scale: 1.14;
+  button {
+    margin: 2px;
+    width: 45px;
+    height: 45px;
+    padding: 0 10px;
+    white-space: nowrap;
+    overflow: clip;
+    transition: 0.3s width;
+    font-size: 17px;
+    border-radius: 10rem;
+    border: 2px solid var(--text-fade);
+    background-color: var(--btn-bg);
+    font-weight: 500;
+    color: var(--text);
+
+    span {
+      margin: 0 6px;
+    }
+    strong {
+      font-family: "Noto Color Emoji", sans-serif;
+      font-weight: 700;
+    }
+
+    &:hover {
+      strong {
+        font-family: "Noto Emoji", sans-serif;
+      }
+      width: fit-content;
+    }
+  }
+}
