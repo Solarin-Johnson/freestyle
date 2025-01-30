@@ -25,19 +25,18 @@ body {
 }
 
 #root {
-  display: grid;
   padding: 80px 0;
+  display: grid;
   min-height: 100vh;
   box-sizing: border-box;
 }
-
 #serif {
   font-family: "Crimson Text", serif;
 }
 
 .container {
   width: 100%;
-  max-width: 1540px;
+  max-width: 1380px;
   padding: var(--gap);
   box-sizing: border-box;
   justify-self: center;
