@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Interpolate size</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="canvas">
+      <div class="toolbar">
+        <div class="tool-container">
+          <div class="tool">
+            <i data-lucide="wand"></i>
+            <i data-lucide="lasso"></i>
+            <i data-lucide="crop"></i>
+            <i data-lucide="sliders-horizontal"></i>
+            <i data-lucide="blend"></i>
+            <i data-lucide="message-square-text"></i>
+            <i data-lucide="hand"></i>
+          </div>
+        </div>
+        <label class="switch">
+          <div class="slider">
+            <i data-lucide="brush" class="slider"></i>
+            <input type="checkbox" checked name="" id="" />
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
