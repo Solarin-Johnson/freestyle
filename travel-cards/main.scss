@@ -4,6 +4,7 @@
   --bg-color: 160, 160, 160;
   --text-color: 255, 255, 255;
   --fg-color: 60, 60, 60;
+  --timing-dur: 0.4s;
   interpolate-size: allow-keywords;
   color-scheme: light dark;
 }
@@ -30,19 +31,19 @@ body {
 }
 
 .content {
-  position: relative;
+  // position: relative;
   position: absolute;
   right: 50%;
   bottom: 50%;
   transform: translate(50%, 50%);
-  transition: 0.5s;
+  transition: var(--timing-dur);
 
   > button {
     top: 14px;
     left: 14px;
     position: absolute;
     margin: 12px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
     color: rgb(var(--text-color));
     border: none;
     border-radius: 50%;
@@ -51,7 +52,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: 0.3s;
+    transition: var(--timing-dur);
 
     svg {
       padding: 4px;
@@ -62,6 +63,13 @@ body {
       }
     }
   }
+
+  .normal {
+    .card-body {
+      animation: blur-in-camo var(--timing-dur);
+    }
+  }
+
   &:has(.peekaboo) {
     right: 24px;
     bottom: 24px;
@@ -71,23 +79,6 @@ body {
 
     > button {
       transform: translateX(-12px);
-    }
-  }
-
-  .peekaboo {
-    height: 240px;
-    .image {
-      height: 2px;
-      opacity: 0;
-    }
-
-    .card-body {
-      h2 {
-        margin-left: 54px;
-      }
-    }
-
-    content button {
       svg {
         &:first-child {
           display: block;
@@ -98,16 +89,32 @@ body {
       }
     }
   }
+
+  .peekaboo {
+    height: 240px;
+    animation: blur-in var(--timing-dur);
+    .card {
+      .image {
+        height: 0;
+        opacity: 0;
+      }
+
+      &-body {
+        h2 {
+          margin-left: 50px;
+        }
+      }
+    }
+  }
 }
 
 .card {
   &-container {
     z-index: 1;
-    // justify-self: center;
     display: flex;
     flex-direction: column;
     width: clamp(240px, 75vw, 380px);
-    height: 470px;
+    height: 460px;
     gap: 1rem;
     overflow-y: scroll;
     border-radius: 34px;
@@ -118,17 +125,20 @@ body {
     box-sizing: border-box;
     @include blur-default();
     background-color: rgba(var(--bg-color), 0.5);
-    transition: 0.3s;
+    transition: var(--timing-dur);
+    scroll-snap-type: y mandatory;
   }
   & {
     flex: 1 0 100%;
-    height: 100%;
+    min-height: 0px;
     display: grid;
     gap: 10px;
+    align-content: start;
+    scroll-snap-align: center;
 
     .image {
       height: fit-content;
-      transition: 0.5s;
+      transition: var(--timing-dur);
       overflow: hidden;
       border-radius: 22px;
       border: 1px solid rgba(var(--text-color), 0.05);
@@ -143,9 +153,11 @@ body {
     &-body {
       display: grid;
       row-gap: 10px;
+      transition: var(--timing-dur) filter;
+      align-content: start;
 
       h2 {
-        transition: 0.5s;
+        transition: var(--timing-dur);
         display: flex;
         align-items: center;
         font-weight: 550;
@@ -217,6 +229,24 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+@keyframes blur-in {
+  from {
+    filter: blur(6px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+
+@keyframes blur-in-camo {
+  from {
+    filter: blur(6px);
+  }
+  to {
+    filter: blur(0);
   }
 }
 

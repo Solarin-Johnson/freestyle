@@ -111,7 +111,7 @@ const CardContainer = ({ data }) => {
           <i data-lucide="maximize-2" />
           <i data-lucide="minimize" />
         </button>
-        <div className={`card-container ${isPeekaboo ? "peekaboo" : ""}`}>
+        <div className={`card-container ${isPeekaboo ? "peekaboo" : "normal"}`}>
           {data.map((card) => (
             <Card key={card.name} {...card} />
           ))}
