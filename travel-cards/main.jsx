@@ -74,48 +74,87 @@ function Card({ name, country, image, description, tags, bookmark }) {
   );
 }
 
-const getImage = (index, data) => {
-  const length = data.length;
-  const prevIndex = (index - 1 + length) % length;
-  return {
-    current: data[index].image,
-    prev: data[prevIndex].image,
-  };
-};
-
 const BgImage = ({ top, under }) => {
   return (
-    <div className="bg-image">
+    <div className="bg-image" key={top}>
       <img src={`${IMAGE_ROOT}${top}`} alt="" className="top" />
       <img src={`${IMAGE_ROOT}${under}`} alt="" className="under" />
     </div>
   );
 };
 
-// const CardButtons
+const IndicatorDots = ({ total, currentIndex, setIndex = () => {} }) => {
+  return (
+    <div className="indicator-dots">
+      {Array.from({ length: total }).map((_, index) => (
+        <span
+          key={index}
+          className={index === currentIndex ? "active" : ""}
+          onClick={() => setIndex(index)}
+        ></span>
+      ))}
+    </div>
+  );
+};
 
 const CardContainer = ({ data }) => {
+  const cardContainerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [bgImage, setBgImage] = useState({ prev: "", current: "" });
   const [isPeekaboo, setIsPeekaboo] = useState(false);
+  const [images, setImages] = useState({
+    current: data[0].image,
+    prev: null,
+  });
 
   useEffect(() => {
-    setBgImage(getImage(currentIndex, data));
-  }, [currentIndex, data]);
+    const handleScroll = () => {
+      if (!cardContainerRef.current) return;
+      const { scrollTop, clientHeight } = cardContainerRef.current;
+      const newIndex = Math.round(scrollTop / clientHeight);
+      if (newIndex !== currentIndex) {
+        setCurrentIndex(newIndex);
+        setImages({
+          current: data[newIndex].image,
+          prev: data[currentIndex].image,
+        });
+      }
+    };
+
+    const container = cardContainerRef.current;
+    container?.addEventListener("scroll", handleScroll);
+    return () => container?.removeEventListener("scroll", handleScroll);
+  }, [currentIndex]);
+
+  const scrollToIndex = (index) => {
+    if (!cardContainerRef.current) return;
+    const targetScroll = index * cardContainerRef.current.clientHeight;
+    cardContainerRef.current.scrollTo({
+      top: targetScroll,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
-      <BgImage top={bgImage.current} under={bgImage.prev} />
+      <BgImage top={images.current} under={images.prev} />
       <div className="content">
         <button onClick={() => setIsPeekaboo(!isPeekaboo)}>
           <i data-lucide="maximize-2" />
           <i data-lucide="minimize" />
         </button>
-        <div className={`card-container ${isPeekaboo ? "peekaboo" : "normal"}`}>
+        <div
+          className={`card-container ${isPeekaboo ? "peekaboo" : "normal"}`}
+          ref={cardContainerRef}
+        >
           {data.map((card) => (
             <Card key={card.name} {...card} />
           ))}
         </div>
+        <IndicatorDots
+          total={data.length}
+          currentIndex={currentIndex}
+          setIndex={scrollToIndex}
+        />
       </div>
     </>
   );
