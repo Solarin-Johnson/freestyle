@@ -106,7 +106,7 @@ const CardContainer = ({ data }) => {
   return (
     <>
       <BgImage top={bgImage.current} under={bgImage.prev} />
-      <div className={`card-container ${isPeekaboo ? "peekaboo" : ""}`}>
+      <div className={`card-container ${isPeekaboo ? "peekaboo" : "normal"}`}>
         <button onClick={() => setIsPeekaboo(!isPeekaboo)}>
           <i data-lucide="maximize-2" />
           <i data-lucide="minimize" />

@@ -3,6 +3,7 @@
   --bg-color: 160, 160, 160;
   --text-color: 255, 255, 255;
   --fg-color: 60, 60, 60;
+  --timing-dur: 0.4s;
   interpolate-size: allow-keywords;
   color-scheme: light dark;
 }
@@ -43,7 +44,7 @@ body {
   right: 50%;
   bottom: 50%;
   transform: translate(50%, 50%);
-  transition: 0.5s;
+  transition: var(--timing-dur);
 }
 .card-container > button {
   position: absolute;
@@ -66,12 +67,16 @@ body {
 .card-container > button svg:first-child {
   display: none;
 }
+.card-container.normal .card-body {
+  animation: blur-in-camo var(--timing-dur);
+}
 .card-container.peekaboo {
   right: 24px;
   bottom: 24px;
   transform: none;
   justify-self: end;
   align-self: end;
+  animation: blur-in var(--timing-dur);
 }
 .card-container.peekaboo .image {
   height: 2px;
@@ -98,7 +103,7 @@ body {
 .card .image {
   height: -moz-fit-content;
   height: fit-content;
-  transition: 0.5s;
+  transition: var(--timing-dur);
   overflow: hidden;
   border-radius: 22px;
   border: 1px solid rgba(var(--text-color), 0.05);
@@ -112,9 +117,10 @@ body {
 .card-body {
   display: grid;
   row-gap: 10px;
+  transition: var(--timing-dur) filter;
 }
 .card-body h2 {
-  transition: 0.5s;
+  transition: var(--timing-dur);
   display: flex;
   align-items: center;
   font-weight: 550;
@@ -179,6 +185,22 @@ body {
      object-fit: cover;
 }
 
+@keyframes blur-in {
+  from {
+    filter: blur(12px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+@keyframes blur-in-camo {
+  from {
+    filter: blur(12px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: 25, 25, 25;
