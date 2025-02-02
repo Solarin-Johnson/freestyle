@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Emoji:wght@300..700&display=swap");
+
 :root {
   interpolate-size: allow-keywords;
+}
+
+:root {
   --text: light-dark(#000000, #ffffff);
   --text-fade: light-dark(#00000030, #ffffff15);
   --btn-bg: light-dark(#ebebeb, #2b2b2b);
@@ -21,10 +25,11 @@ body {
   background-size: 60px 60px;
   background-position: center;
   position: relative;
+  display: grid; /* Not compatible browsers*/
 
   &::after {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
