@@ -106,14 +106,16 @@ const CardContainer = ({ data }) => {
   return (
     <>
       <BgImage top={bgImage.current} under={bgImage.prev} />
-      <div className={`card-container ${isPeekaboo ? "peekaboo" : ""}`}>
+      <div className="content">
         <button onClick={() => setIsPeekaboo(!isPeekaboo)}>
           <i data-lucide="maximize-2" />
           <i data-lucide="minimize" />
         </button>
-        {data.map((card) => (
-          <Card key={card.name} {...card} />
-        ))}
+        <div className={`card-container ${isPeekaboo ? "peekaboo" : ""}`}>
+          {data.map((card) => (
+            <Card key={card.name} {...card} />
+          ))}
+        </div>
       </div>
     </>
   );

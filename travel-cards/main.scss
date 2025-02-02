@@ -29,15 +29,87 @@ body {
   height: 100vh;
 }
 
+.content {
+  position: relative;
+  position: absolute;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%, 50%);
+  transition: 0.5s;
+
+  > button {
+    top: 14px;
+    left: 14px;
+    position: absolute;
+    margin: 12px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgb(var(--text-color));
+    border: none;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: 0.3s;
+
+    svg {
+      padding: 4px;
+      width: 18px;
+
+      &:first-child {
+        display: none;
+      }
+    }
+  }
+  &:has(.peekaboo) {
+    right: 24px;
+    bottom: 24px;
+    transform: none;
+    justify-self: end;
+    align-self: end;
+
+    > button {
+      transform: translateX(-12px);
+    }
+  }
+
+  .peekaboo {
+    height: 240px;
+    .image {
+      height: 2px;
+      opacity: 0;
+    }
+
+    .card-body {
+      h2 {
+        margin-left: 54px;
+      }
+    }
+
+    content button {
+      svg {
+        &:first-child {
+          display: block;
+        }
+        &:last-child {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 .card {
   &-container {
     z-index: 1;
     // justify-self: center;
     display: flex;
+    flex-direction: column;
     width: clamp(240px, 75vw, 380px);
-    // height: 470px;
+    height: 470px;
     gap: 1rem;
-    overflow: hidden;
+    overflow-y: scroll;
     border-radius: 34px;
     padding: 12px;
     border: 2px solid rgba(255, 255, 255, 0.25);
@@ -46,71 +118,11 @@ body {
     box-sizing: border-box;
     @include blur-default();
     background-color: rgba(var(--bg-color), 0.5);
-    position: absolute;
-    right: 50%;
-    bottom: 50%;
-    transform: translate(50%, 50%);
-    transition: 0.5s;
-
-    > button {
-      position: absolute;
-      margin: 12px;
-      background-color: rgba(0, 0, 0, 0.2);
-      color: rgb(var(--text-color));
-      border: none;
-      border-radius: 50%;
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      transition: 0.3s;
-
-      svg {
-        padding: 4px;
-        width: 18px;
-
-        &:first-child {
-          display: none;
-        }
-      }
-    }
-
-    &.peekaboo {
-      // position: absolute;
-      right: 24px;
-      bottom: 24px;
-      transform: none;
-      justify-self: end;
-      align-self: end;
-      .image {
-        height: 2px;
-        opacity: 0;
-      }
-
-      .card-body {
-        h2 {
-          margin-left: 54px;
-        }
-      }
-
-      > button {
-        transform: translateX(-12px);
-
-        svg {
-          &:first-child {
-            display: block;
-          }
-          &:last-child {
-            display: none;
-          }
-        }
-      }
-    }
+    transition: 0.3s;
   }
   & {
     flex: 1 0 100%;
-    max-height: 100%;
+    height: 100%;
     display: grid;
     gap: 10px;
 

@@ -23,29 +23,17 @@ body {
   height: 100vh;
 }
 
-.card-container {
-  z-index: 1;
-  display: flex;
-  width: clamp(240px, 75vw, 380px);
-  gap: 1rem;
-  overflow: hidden;
-  border-radius: 34px;
-  padding: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-bottom-width: 1px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1254901961);
-  box-sizing: border-box;
-  -webkit-backdrop-filter: blur(24px);
-          backdrop-filter: blur(24px);
-  background-color: rgba(var(--fg-color), 0.2);
-  background-color: rgba(var(--bg-color), 0.5);
+.content {
+  position: relative;
   position: absolute;
   right: 50%;
   bottom: 50%;
   transform: translate(50%, 50%);
   transition: 0.5s;
 }
-.card-container > button {
+.content > button {
+  top: 14px;
+  left: 14px;
   position: absolute;
   margin: 12px;
   background-color: rgba(0, 0, 0, 0.2);
@@ -56,42 +44,66 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 10;
   transition: 0.3s;
 }
-.card-container > button svg {
+.content > button svg {
   padding: 4px;
   width: 18px;
 }
-.card-container > button svg:first-child {
+.content > button svg:first-child {
   display: none;
 }
-.card-container.peekaboo {
+.content:has(.peekaboo) {
   right: 24px;
   bottom: 24px;
   transform: none;
   justify-self: end;
   align-self: end;
 }
-.card-container.peekaboo .image {
+.content:has(.peekaboo) > button {
+  transform: translateX(-12px);
+}
+.content .peekaboo {
+  height: 240px;
+}
+.content .peekaboo .image {
   height: 2px;
   opacity: 0;
 }
-.card-container.peekaboo .card-body h2 {
+.content .peekaboo .card-body h2 {
   margin-left: 54px;
 }
-.card-container.peekaboo > button {
-  transform: translateX(-12px);
-}
-.card-container.peekaboo > button svg:first-child {
+.content .peekaboo content button svg:first-child {
   display: block;
 }
-.card-container.peekaboo > button svg:last-child {
+.content .peekaboo content button svg:last-child {
   display: none;
+}
+
+.card-container {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: clamp(240px, 75vw, 380px);
+  height: 470px;
+  gap: 1rem;
+  overflow-y: scroll;
+  border-radius: 34px;
+  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-bottom-width: 1px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1254901961);
+  box-sizing: border-box;
+  -webkit-backdrop-filter: blur(24px);
+          backdrop-filter: blur(24px);
+  background-color: rgba(var(--fg-color), 0.2);
+  background-color: rgba(var(--bg-color), 0.5);
+  transition: 0.3s;
 }
 .card {
   flex: 1 0 100%;
-  max-height: 100%;
+  height: 100%;
   display: grid;
   gap: 10px;
 }
