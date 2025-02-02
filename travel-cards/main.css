@@ -91,7 +91,7 @@ body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  width: clamp(240px, 75vw, 380px);
+  width: clamp(320px, 75vw, 380px);
   height: 460px;
   gap: 1rem;
   overflow-y: scroll;
@@ -297,6 +297,15 @@ body {
   100% {
     opacity: 1;
     filter: blur(0);
+  }
+}
+@media screen and (max-width: 380px) {
+  .content {
+    scale: 0.8;
+    transform-origin: bottom right;
+  }
+  .content .peekaboo {
+    height: 300px;
   }
 }
 @media (prefers-color-scheme: dark) {
