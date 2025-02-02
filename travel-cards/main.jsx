@@ -101,37 +101,49 @@ const CardContainer = ({ data }) => {
   const cardContainerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPeekaboo, setIsPeekaboo] = useState(false);
+  const [isJumping, setIsJumping] = useState(false);
   const [images, setImages] = useState({
     current: data[0].image,
     prev: null,
   });
+
+  const updateImages = (index) => {
+    setImages({
+      current: data[index].image,
+      prev: data[currentIndex].image,
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       if (!cardContainerRef.current) return;
       const { scrollTop, clientHeight } = cardContainerRef.current;
       const newIndex = Math.round(scrollTop / clientHeight);
-      if (newIndex !== currentIndex) {
+      if (newIndex !== currentIndex && !isJumping) {
         setCurrentIndex(newIndex);
-        setImages({
-          current: data[newIndex].image,
-          prev: data[currentIndex].image,
-        });
+        updateImages(newIndex);
       }
     };
 
     const container = cardContainerRef.current;
     container?.addEventListener("scroll", handleScroll);
     return () => container?.removeEventListener("scroll", handleScroll);
-  }, [currentIndex]);
+  }, [currentIndex, isJumping, data]);
 
   const scrollToIndex = (index) => {
     if (!cardContainerRef.current) return;
+    setIsJumping(true);
     const targetScroll = index * cardContainerRef.current.clientHeight;
     cardContainerRef.current.scrollTo({
       top: targetScroll,
       behavior: "smooth",
     });
+
+    setTimeout(() => {
+      setIsJumping(false);
+      setCurrentIndex(index);
+      updateImages(index);
+    }, 500);
   };
 
   return (
