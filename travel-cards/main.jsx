@@ -138,11 +138,11 @@ const CardContainer = ({ data }) => {
       top: targetScroll,
       behavior: "smooth",
     });
+    setCurrentIndex(index);
+    updateImages(index);
 
     setTimeout(() => {
       setIsJumping(false);
-      setCurrentIndex(index);
-      updateImages(index);
     }, 500);
   };
 

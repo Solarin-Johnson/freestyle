@@ -122,7 +122,7 @@ body {
     overflow-y: scroll;
     border-radius: 34px;
     padding: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-bottom-width: 1px;
     box-shadow: 0 3px 5px #00000020;
     box-sizing: border-box;
@@ -158,11 +158,11 @@ body {
       overflow: hidden;
       border-radius: 22px;
       border: 1px solid rgba(var(--text-color), 0.05);
+      aspect-ratio: 16/9;
 
       img {
         width: 100%;
         object-fit: cover;
-        aspect-ratio: 16/9;
       }
     }
 
@@ -267,6 +267,7 @@ body {
   margin-top: 12px;
   @include blur-default();
   background-color: rgba(var(--bg-color), 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 8px;
   border-radius: 10rem;
   transition: var(--timing-dur);
@@ -306,7 +307,7 @@ body {
   0% {
     opacity: 0;
     scale: 0.8;
-    filter: blur(4px);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
@@ -322,6 +323,7 @@ body {
   100% {
     opacity: 0;
     scale: 0.8;
+    filter: blur(6px);
   }
 }
 
