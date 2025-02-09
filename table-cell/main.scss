@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
+
+@mixin light-theme {
+  --bg-color: 250, 250, 250;
+  --text-color: 0, 0, 0;
+  --fg-color: 55, 55, 55;
+}
+
+@mixin dark-theme {
+  --bg-color: 16, 16, 16;
+  --text-color: 231, 231, 231;
+  --fg-color: 231, 231, 231;
+}
+
+:root {
+  @include light-theme;
+  --th-fade-factor: 0.75;
+  --td-fade-factor: 0.35;
+  color-scheme: light dark;
+
+  @media (prefers-color-scheme: dark) {
+    @include dark-theme;
+  }
+
+  &[data-theme="dark"] {
+    @include dark-theme;
+
+    table {
+      --cell-bg: hsl(var(--hue), 60%, 15%);
+      --cell-main-bg: hsl(var(--hue), 85%, 28%);
+    }
+  }
+  &[data-theme="light"] {
+    @include light-theme;
+    table {
+      --cell-bg: hsl(var(--hue), 30%, 80%);
+      --cell-main-bg: hsl(var(--hue), 45%, 55%);
+
+      th {
+        font-weight: 500;
+      }
+
+      td:hover {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+html,
+body {
+  margin: 0;
+  background: rgb(var(--bg-color));
+  color: rgb(var(--text-color));
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  height: 100dvh;
+  background: linear-gradient(
+      to right,
+      rgba(var(--fg-color), 0.3) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(var(--fg-color), 0.3) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center -2px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(
+      165deg,
+      rgba(var(--bg-color), 0.1),
+      rgba(var(--bg-color)) 50%
+    );
+  }
+}
+
+section {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.table-scroll {
+  max-height: 75vh;
+  background-color: rgba(var(--bg-color));
+  border: 1px solid rgba(var(--fg-color), 0.2);
+  border-radius: 8px;
+  max-width: 100vw;
+  padding: 4px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--fg-color), 0.1) rgba(var(--bg-color));
+
+  &:hover {
+    scrollbar-color: rgba(var(--fg-color), 0.2) rgba(var(--bg-color));
+  }
+}
+
+$table-cols: 10;
+$table-rows: 10;
+
+table {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  border-spacing: 0;
+
+  tr {
+    height: 36px;
+
+    &:first-of-type {
+      th {
+        top: 0;
+        position: sticky;
+        z-index: 0;
+      }
+      th:first-of-type {
+        z-index: 1;
+      }
+    }
+
+    > * {
+      padding: 0 15px;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+
+    td {
+      width: 60px;
+      color: rgba(var(--text-color), var(--td-fade-factor));
+
+      &:hover {
+        --td-fade-factor: 1 !important;
+        font-weight: 550;
+        background: var(--cell-main-bg);
+      }
+    }
+
+    th {
+      font-weight: 450;
+      position: sticky;
+      left: 0;
+      color: rgba(var(--text-color), var(--th-fade-factor));
+      background-color: rgb(var(--bg-color));
+    }
+  }
+
+  @for $i from 1 through $table-cols {
+    &:has(td:nth-of-type(#{$i}):hover) {
+      td,
+      th {
+        --th-fade-factor: 0.2;
+        --td-fade-factor: 0.2;
+      }
+      tr:not(:first-of-type):has(~ tr:hover) {
+        td:nth-of-type(#{$i}) {
+          --td-fade-factor: 1;
+          background: var(--cell-bg);
+        }
+      }
+      tr:has(~ tr:hover) {
+        th:nth-of-type(#{$i + 1}) {
+          --th-fade-factor: 1;
+        }
+      }
+    }
+  }
+
+  td:has(~ td:hover) {
+    --td-fade-factor: 1 !important;
+    background: var(--cell-bg);
+  }
+  th:has(~ td:hover) {
+    --th-fade-factor: 1 !important;
+  }
+}

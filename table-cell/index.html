@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table Cell</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.21.6/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tweakpane@3"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel" src="main.jsx"></script>
+
+    <section>
+      <div class="table-scroll">
+        <table>
+          <tr>
+            <th></th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+          </tr>
+          <tr>
+            <th>08:00 - 09:00</th>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td>$120</td>
+            <td>$130</td>
+            <td>$140</td>
+            <td>$160</td>
+          </tr>
+          <tr>
+            <th>09:00 - 10:00</th>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td>$120</td>
+            <td>$130</td>
+            <td>$140</td>
+            <td>$150</td>
+            <td>$170</td>
+          </tr>
+          <tr>
+            <th>10:00 - 11:00</th>
+            <td>$120</td>
+            <td>$130</td>
+            <td>$130</td>
+            <td>$140</td>
+            <td>$150</td>
+            <td>$160</td>
+            <td>$180</td>
+          </tr>
+          <tr>
+            <th>11:00 - 12:00</th>
+            <td>$130</td>
+            <td>$140</td>
+            <td>$140</td>
+            <td>$150</td>
+            <td>$160</td>
+            <td>$170</td>
+            <td>$190</td>
+          </tr>
+          <tr>
+            <th>12:00 - 13:00</th>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td>$180</td>
+            <td>$200</td>
+          </tr>
+          <tr>
+            <th>13:00 - 14:00</th>
+            <td>$140</td>
+            <td>$150</td>
+            <td>$150</td>
+            <td>$160</td>
+            <td>$170</td>
+            <td>$190</td>
+            <td>$210</td>
+          </tr>
+          <tr>
+            <th>14:00 - 15:00</th>
+            <td>$140</td>
+            <td>$150</td>
+            <td>$150</td>
+            <td>$160</td>
+            <td>$170</td>
+            <td>$190</td>
+            <td>$210</td>
+          </tr>
+          <tr>
+            <th>15:00 - 16:00</th>
+            <td>$150</td>
+            <td>$160</td>
+            <td>$160</td>
+            <td>$170</td>
+            <td>$180</td>
+            <td>$200</td>
+            <td>$220</td>
+          </tr>
+          <tr>
+            <th>16:00 - 17:00</th>
+            <td>$160</td>
+            <td>$170</td>
+            <td>$170</td>
+            <td>$180</td>
+            <td>$190</td>
+            <td>$210</td>
+            <td>$230</td>
+          </tr>
+          <tr>
+            <th>17:00 - 18:00</th>
+            <td>$170</td>
+            <td>$180</td>
+            <td>$180</td>
+            <td>$190</td>
+            <td>$200</td>
+            <td>$220</td>
+            <td>$240</td>
+          </tr>
+          <tr>
+            <th>18:00 - 19:00</th>
+            <td>$180</td>
+            <td>$190</td>
+            <td>$190</td>
+            <td>$200</td>
+            <td>$210</td>
+            <td>$230</td>
+            <td>$250</td>
+          </tr>
+          <tr>
+            <th>19:00 - 20:00</th>
+            <td class="unavailable">-</td>
+            <td class="unavailable">-</td>
+            <td>$200</td>
+            <td>$210</td>
+            <td>$220</td>
+            <td>$250</td>
+            <td>$270</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <script type="module">
+      import { Pane } from "https://cdn.skypack.dev/tweakpane@4.0.4";
+
+      const config = {
+        theme: "dark",
+        hue: Math.floor(Math.random() * 359),
+      };
+
+      const ctrl = new Pane({
+        title: "Config",
+        expanded: false,
+      });
+
+      const update = () => {
+        document.documentElement.dataset.theme = config.theme;
+        document.documentElement.style.setProperty("--hue", config.hue);
+      };
+
+      const sync = (event) => {
+        if (
+          !document.startViewTransition ||
+          event.target.controller.view.labelElement.innerText !== "Theme"
+        )
+          return update();
+        document.startViewTransition(() => update());
+      };
+
+      ctrl.addBinding(config, "hue", {
+        min: 0,
+        max: 359,
+        step: 1,
+        label: "hue",
+      });
+
+      ctrl.addBinding(config, "theme", {
+        label: "Theme",
+        options: {
+          System: "system",
+          Light: "light",
+          Dark: "dark",
+        },
+      });
+
+      ctrl.on("change", sync);
+      update();
+    </script>
+  </body>
+</html>
