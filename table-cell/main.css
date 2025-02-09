@@ -41,7 +41,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
+  padding: 12px;
   box-sizing: border-box;
 }
 body::before {
@@ -84,6 +84,10 @@ table {
   border-spacing: 0;
   --sibling: oklch(0.5 0.1 calc(var(--hue) * 1deg) / 0.4);
   --hovered: oklch(0.5 0.2 calc(var(--hue) * 1deg) / 0.8);
+}
+table:not(:hover) td,
+table:not(:hover) th {
+  transition: 200ms color;
 }
 table tr {
   height: 36px;
@@ -201,46 +205,14 @@ table:has(td:nth-of-type(7):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth
 table:has(td:nth-of-type(7):hover) tr:has(~ tr:hover) th:nth-of-type(8) {
   --th-fade-factor: 1;
 }
-table:has(td:nth-of-type(8):hover) td,
-table:has(td:nth-of-type(8):hover) th {
-  --th-fade-factor: 0.2;
-  --td-fade-factor: 0.2;
-}
-table:has(td:nth-of-type(8):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(8) {
-  --td-fade-factor: 1;
-  background: var(--sibling);
-}
-table:has(td:nth-of-type(8):hover) tr:has(~ tr:hover) th:nth-of-type(9) {
-  --th-fade-factor: 1;
-}
-table:has(td:nth-of-type(9):hover) td,
-table:has(td:nth-of-type(9):hover) th {
-  --th-fade-factor: 0.2;
-  --td-fade-factor: 0.2;
-}
-table:has(td:nth-of-type(9):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(9) {
-  --td-fade-factor: 1;
-  background: var(--sibling);
-}
-table:has(td:nth-of-type(9):hover) tr:has(~ tr:hover) th:nth-of-type(10) {
-  --th-fade-factor: 1;
-}
-table:has(td:nth-of-type(10):hover) td,
-table:has(td:nth-of-type(10):hover) th {
-  --th-fade-factor: 0.2;
-  --td-fade-factor: 0.2;
-}
-table:has(td:nth-of-type(10):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(10) {
-  --td-fade-factor: 1;
-  background: var(--sibling);
-}
-table:has(td:nth-of-type(10):hover) tr:has(~ tr:hover) th:nth-of-type(11) {
-  --th-fade-factor: 1;
-}
 table td:has(~ td:hover) {
   --td-fade-factor: 1 !important;
   background: var(--sibling);
 }
 table th:has(~ td:hover) {
   --th-fade-factor: 1 !important;
+}
+
+.tp-dfwv {
+  z-index: 10;
 }/*# sourceMappingURL=main.css.map */
