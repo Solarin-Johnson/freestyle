@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
 :root {
-  --bg-color: 250, 250, 250;
-  --text-color: 0, 0, 0;
-  --fg-color: 55, 55, 55;
+  --bg-color: 16, 16, 16;
+  --text-color: 231, 231, 231;
+  --fg-color: 231, 231, 231;
   --th-fade-factor: 0.75;
-  --td-fade-factor: 0.35;
+  --td-fade-factor: 0.4;
   color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
@@ -19,24 +18,10 @@
   --text-color: 231, 231, 231;
   --fg-color: 231, 231, 231;
 }
-:root[data-theme=dark] table {
-  --cell-bg: hsl(var(--hue), 60%, 15%);
-  --cell-main-bg: hsl(var(--hue), 85%, 28%);
-}
 :root[data-theme=light] {
   --bg-color: 250, 250, 250;
   --text-color: 0, 0, 0;
   --fg-color: 55, 55, 55;
-}
-:root[data-theme=light] table {
-  --cell-bg: hsl(var(--hue), 30%, 80%);
-  --cell-main-bg: hsl(var(--hue), 45%, 55%);
-}
-:root[data-theme=light] table th {
-  font-weight: 500;
-}
-:root[data-theme=light] table td:hover {
-  font-weight: 600;
 }
 
 html,
@@ -44,15 +29,20 @@ body {
   margin: 0;
   background: rgb(var(--bg-color));
   color: rgb(var(--text-color));
-  font-family: "Inter", sans-serif;
+  font-family: sans-serif;
 }
 
 body {
   height: 100dvh;
+  width: 100vw;
   background: linear-gradient(to right, rgba(var(--fg-color), 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(var(--fg-color), 0.3) 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: center -2px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  box-sizing: border-box;
 }
 body::before {
   content: "";
@@ -68,39 +58,37 @@ body::before {
 section {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
-  box-sizing: border-box;
-}
-
-.table-scroll {
-  max-height: 75vh;
-  background-color: rgba(var(--bg-color));
-  border: 1px solid rgba(var(--fg-color), 0.2);
-  border-radius: 8px;
-  max-width: 100vw;
+  justify-self: center;
   padding: 4px;
+  box-sizing: border-box;
+  background-color: rgba(var(--bg-color));
+  border: 1px solid rgba(var(--fg-color), 0.25);
+  border-radius: 8px;
+  max-height: 100%;
+  max-width: 100%;
+}
+section .table-scroll {
+  max-height: 100%;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--fg-color), 0.1) rgba(var(--bg-color));
 }
-.table-scroll:hover {
+section .table-scroll:hover {
   scrollbar-color: rgba(var(--fg-color), 0.2) rgba(var(--bg-color));
 }
 
 table {
   text-align: center;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 500;
   border-spacing: 0;
+  --sibling: oklch(0.5 0.1 calc(var(--hue) * 1deg) / 0.4);
+  --hovered: oklch(0.5 0.2 calc(var(--hue) * 1deg) / 0.8);
 }
 table tr {
   height: 36px;
 }
-table tr:first-of-type th {
+table tr th {
   top: 0;
   position: sticky;
   z-index: 0;
@@ -114,13 +102,13 @@ table tr > * {
   white-space: nowrap;
 }
 table tr td {
-  width: 60px;
+  width: 64px;
   color: rgba(var(--text-color), var(--td-fade-factor));
 }
 table tr td:hover {
   --td-fade-factor: 1 !important;
-  font-weight: 550;
-  background: var(--cell-main-bg);
+  font-weight: 600;
+  background: var(--hovered);
 }
 table tr th {
   font-weight: 450;
@@ -136,7 +124,7 @@ table:has(td:nth-of-type(1):hover) th {
 }
 table:has(td:nth-of-type(1):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(1) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(1):hover) tr:has(~ tr:hover) th:nth-of-type(2) {
   --th-fade-factor: 1;
@@ -148,7 +136,7 @@ table:has(td:nth-of-type(2):hover) th {
 }
 table:has(td:nth-of-type(2):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(2) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(2):hover) tr:has(~ tr:hover) th:nth-of-type(3) {
   --th-fade-factor: 1;
@@ -160,7 +148,7 @@ table:has(td:nth-of-type(3):hover) th {
 }
 table:has(td:nth-of-type(3):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(3) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(3):hover) tr:has(~ tr:hover) th:nth-of-type(4) {
   --th-fade-factor: 1;
@@ -172,7 +160,7 @@ table:has(td:nth-of-type(4):hover) th {
 }
 table:has(td:nth-of-type(4):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(4) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(4):hover) tr:has(~ tr:hover) th:nth-of-type(5) {
   --th-fade-factor: 1;
@@ -184,7 +172,7 @@ table:has(td:nth-of-type(5):hover) th {
 }
 table:has(td:nth-of-type(5):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(5) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(5):hover) tr:has(~ tr:hover) th:nth-of-type(6) {
   --th-fade-factor: 1;
@@ -196,7 +184,7 @@ table:has(td:nth-of-type(6):hover) th {
 }
 table:has(td:nth-of-type(6):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(6) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(6):hover) tr:has(~ tr:hover) th:nth-of-type(7) {
   --th-fade-factor: 1;
@@ -208,7 +196,7 @@ table:has(td:nth-of-type(7):hover) th {
 }
 table:has(td:nth-of-type(7):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(7) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(7):hover) tr:has(~ tr:hover) th:nth-of-type(8) {
   --th-fade-factor: 1;
@@ -220,7 +208,7 @@ table:has(td:nth-of-type(8):hover) th {
 }
 table:has(td:nth-of-type(8):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(8) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(8):hover) tr:has(~ tr:hover) th:nth-of-type(9) {
   --th-fade-factor: 1;
@@ -232,7 +220,7 @@ table:has(td:nth-of-type(9):hover) th {
 }
 table:has(td:nth-of-type(9):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(9) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(9):hover) tr:has(~ tr:hover) th:nth-of-type(10) {
   --th-fade-factor: 1;
@@ -244,14 +232,14 @@ table:has(td:nth-of-type(10):hover) th {
 }
 table:has(td:nth-of-type(10):hover) tr:not(:first-of-type):has(~ tr:hover) td:nth-of-type(10) {
   --td-fade-factor: 1;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table:has(td:nth-of-type(10):hover) tr:has(~ tr:hover) th:nth-of-type(11) {
   --th-fade-factor: 1;
 }
 table td:has(~ td:hover) {
   --td-fade-factor: 1 !important;
-  background: var(--cell-bg);
+  background: var(--sibling);
 }
 table th:has(~ td:hover) {
   --th-fade-factor: 1 !important;
