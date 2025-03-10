@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+:root {
+  --bg-color: 16, 16, 16;
+  --text-color: 231, 231, 231;
+  --fg-color: 231, 231, 231;
+  --th-fade-factor: 0.75;
+  --td-fade-factor: 0.4;
+  color-scheme: light dark;
+  --size: 50px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: 16, 16, 16;
+    --text-color: 231, 231, 231;
+    --fg-color: 231, 231, 231;
+  }
+}
+:root[data-theme=dark] {
+  --bg-color: 16, 16, 16;
+  --text-color: 231, 231, 231;
+  --fg-color: 231, 231, 231;
+}
+:root[data-theme=light] {
+  --bg-color: 250, 250, 250;
+  --text-color: 0, 0, 0;
+  --fg-color: 55, 55, 55;
+}
+
+html,
+body {
+  margin: 0;
+  background: rgb(var(--bg-color));
+  color: rgb(var(--text-color));
+  font-family: "Geist", sans-serif;
+}
+
+body {
+  height: 100dvh;
+  width: 100vw;
+  background: linear-gradient(to right, rgba(var(--fg-color), 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(var(--fg-color), 0.3) 1px, transparent 1px);
+  background-size: var(--size) var(--size);
+  background-position: center;
+  box-sizing: border-box;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(165deg, rgba(var(--bg-color), 0.1), rgba(var(--bg-color)) 50%);
+}
+
+main {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+}
+
+section {
+  margin-inline: auto;
+  position: relative;
+  z-index: 10;
+  width: calc-size(-moz-fit-content, round(up, size, var(--size)));
+  width: calc-size(fit-content, round(up, size, var(--size)));
+  height: calc-size(auto, round(up, size, var(--size)));
+  border: 1px solid rgba(var(--fg-color), 0.06);
+  background: rgba(var(--bg-color), 0.9);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  width: clamp(0px, 50vw, 360px);
+  flex-direction: column;
+  justify-items: flex-end;
+  margin-bottom: 24px;
+}
+.head h1 {
+  font-size: clamp(1.4rem, 3vw, 1.6rem);
+  margin: 0;
+  font-weight: 600;
+}
+.head span {
+  font-size: 0.8rem;
+  color: rgba(var(--fg-color), 0.6);
+}
+
+form fieldset {
+  all: unset;
+  display: flex;
+}
+form fieldset legend {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+form fieldset label {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(var(--fg-color), 0.2);
+  width: 100%;
+  padding: 8px;
+  gap: 8px;
+}
+form fieldset label span {
+  flex: 1;
+}
+form .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+form .buttons button {
+  width: 100%;
+  padding: 10px;
+  font-family: inherit;
+  border: 1px solid rgba(var(--fg-color), 0.2);
+  background-color: rgba(var(--fg-color), 0.01);
+  color: rgba(var(--fg-color), 0.8);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+form .buttons button:hover {
+  background: rgba(var(--fg-color), 0.03);
+  color: rgba(var(--fg-color), 1);
+}/*# sourceMappingURL=main.css.map */
