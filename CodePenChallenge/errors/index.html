@@ -10,6 +10,7 @@
     <main>
       <section>
         <div class="head">
+          <a href="">Go Home</a>
           <h1>404 - Page Not Found</h1>
           <span>&mdash; but robots are welcome</span>
         </div>
@@ -22,10 +23,33 @@
               <i data-lucide="bot"></i>
             </label>
           </fieldset>
-          <div class="buttons">
-            <button>Go Home</button>
-            <button>Submit</button>
-          </div>
+          <fieldset id="challenge">
+            <h2>
+              <span>Select the word that match this hex</span>
+              <strong>0x526F626F74</strong>
+            </h2>
+            <div class="choice">
+              <label>
+                Human
+                <input type="checkbox" />
+              </label>
+              <label>
+                Error
+                <input type="checkbox" />
+              </label>
+              <label>
+                Robot
+                <input type="checkbox" />
+              </label>
+              <label>
+                404
+                <input type="checkbox" />
+              </label>
+            </div>
+          </fieldset>
+          <!-- <div class="buttons">
+            <button type="button">Verify</button>
+          </div> -->
         </form>
       </section>
     </main>
