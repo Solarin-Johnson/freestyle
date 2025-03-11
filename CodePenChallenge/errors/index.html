@@ -26,30 +26,36 @@
           <fieldset id="challenge">
             <h2>
               <span>Select the word that match this hex</span>
-              <strong>0x526F626F74</strong>
+              <strong>0x4552524F52</strong>
             </h2>
             <div class="choice">
               <label>
                 Human
-                <input type="checkbox" />
+                <input type="radio" name="choice" />
               </label>
-              <label>
+              <label class="correct">
                 Error
-                <input type="checkbox" />
+                <input type="radio" name="choice" />
               </label>
-              <label>
+              <label >
                 Robot
-                <input type="checkbox" />
+                <input type="radio" name="choice" />
               </label>
               <label>
                 404
-                <input type="checkbox" />
+                <input type="radio" name="choice" />
               </label>
             </div>
           </fieldset>
-          <!-- <div class="buttons">
-            <button type="button">Verify</button>
-          </div> -->
+          <fieldset class="results">
+            <div class="right" style="--color: var(--success)">
+              <i data-lucide="check"></i>
+              <span>404 Confirmed. You are a robot.</span>
+            </div>
+            <div class="wrong" style="--color: var(--error)">
+              <i data-lucide="x"></i>
+              <span>Human detected. Beep boop.</span>
+            </div>
         </form>
       </section>
     </main>

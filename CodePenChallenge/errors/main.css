@@ -1,13 +1,15 @@
-@import url("https://fonts.googleapis.c?Wom/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 :root {
-  --bg-color: 16, 16, 16;
-  --text-color: 231, 231, 231;
-  --fg-color: 231, 231, 231;
+  --bg-color: 250, 250, 250;
+  --text-color: 0, 0, 0;
+  --fg-color: 0, 0, 0;
   --th-fade-factor: 0.75;
   --td-fade-factor: 0.4;
+  --size: 50px;
+  --success: #4caf50;
+  --error: #ff5151;
   color-scheme: light dark;
   interpolate-size: allow-keywords;
-  --size: 50px;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -15,16 +17,6 @@
     --text-color: 231, 231, 231;
     --fg-color: 231, 231, 231;
   }
-}
-:root[data-theme=dark] {
-  --bg-color: 16, 16, 16;
-  --text-color: 231, 231, 231;
-  --fg-color: 231, 231, 231;
-}
-:root[data-theme=light] {
-  --bg-color: 250, 250, 250;
-  --text-color: 0, 0, 0;
-  --fg-color: 55, 55, 55;
 }
 
 html,
@@ -36,12 +28,15 @@ body {
 }
 
 body {
-  height: 100dvh;
   width: 100vw;
+  height: 100dvh;
   background: linear-gradient(to right, rgba(var(--fg-color), 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(var(--fg-color), 0.3) 1px, transparent 1px);
   background-size: var(--size) var(--size);
   background-position: center;
   overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 body::before {
   content: "";
@@ -55,38 +50,42 @@ body::before {
 }
 
 main {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  min-height: 100dvh;
+  min-height: 100%;
   display: flex;
-  align-items: flex-end;
-  padding: var(--size);
-  box-sizing: border-box;
   align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 section {
-  margin-inline: auto;
-  position: relative;
-  z-index: 10;
-  width: calc-size(-moz-fit-content, round(up, size, var(--size)));
-  width: calc-size(fit-content, round(up, size, var(--size)));
-  height: calc-size(auto, round(up, size, var(--size)));
+  width: clamp(0px, 90vw, 450px);
   border: 1px solid rgba(var(--fg-color), 0.06);
   background: rgba(var(--bg-color), 0.9);
   padding: 12px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  perspective: 800px;
+  cursor: default;
+}
+section:hover form {
+  transform: rotateX(0deg);
+  visibility: visible;
+  opacity: 1;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .head {
   display: flex;
-  width: clamp(0px, 60vw, 360px);
-  min-width: 100%;
   flex-direction: column;
   align-items: flex-end;
   gap: 3px;
-  margin-bottom: 16px;
 }
 .head a {
   display: block;
@@ -99,7 +98,7 @@ section {
   opacity: 1;
 }
 .head h1 {
-  font-size: clamp(1.4rem, 5vw, 2.1rem);
+  font-size: clamp(1.5rem, 6vw, 2.15rem);
   margin: 0;
   font-weight: 600;
   text-align: right;
@@ -111,21 +110,60 @@ section {
 }
 
 form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 16px;
+  opacity: 0.6;
+  transform-style: preserve-3d;
+  transition: 0.3s ease, 0.15s opacity;
+  will-change: height, opacity, margin;
+}
+form:where(:not(:has(input:checked))) {
+  transform: rotateX(-90deg);
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  margin: 0;
+}
+form > *:first-of-type {
+  margin-top: 24px;
+}
+form > *:not(:first-of-type) {
+  margin-top: 16px;
 }
 form:not(:has(#robot:checked)) #challenge {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  margin: 0;
 }
-form:has(#robot:checked) :is(#primary) {
-  background-color: rgb(var(--fg-color), 0.08);
+form:has(.correct > input:checked) .results > .right {
+  display: flex;
+}
+form:has(#challenge label:not(.correct) > input:checked) .results > .wrong {
+  display: flex;
+}
+form:not(:has(#challenge label > input:checked)) .results {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  margin: 0;
 }
 form fieldset {
   all: unset;
   display: flex;
+  transition: 0.3s ease, 0.15s opacity;
+  will-change: height, opacity, margin;
+}
+form fieldset:has(input:checked) {
+  pointer-events: none;
+  position: relative;
+}
+form fieldset:has(input:checked)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 form fieldset legend {
   font-size: 15px;
@@ -145,7 +183,6 @@ form fieldset label input[type=checkbox] {
   width: 20px;
   height: 20px;
   accent-color: rgb(var(--fg-color));
-  transition: 0.5s;
 }
 form fieldset label span {
   flex: 1;
@@ -155,14 +192,13 @@ form fieldset label span svg {
   opacity: 0.8;
 }
 form #challenge {
-  display: flex;
   flex-direction: column;
   border: 1px solid rgb(var(--fg-color), 0.1);
   overflow: hidden;
-  transition: 0.2s ease;
 }
 form #challenge > * {
   padding: 12px;
+  box-sizing: border-box;
 }
 form #challenge h2 {
   margin: 0;
@@ -176,7 +212,7 @@ form #challenge h2 span {
 }
 form #challenge h2 strong {
   font-weight: 550;
-  font-size: 23px;
+  font-size: 30px;
 }
 form #challenge .choice {
   display: grid;
@@ -186,40 +222,38 @@ form #challenge .choice {
 form #challenge .choice label {
   border: none;
   background-color: rgb(var(--fg-color), 0.02);
-  aspect-ratio: 7/3;
+  aspect-ratio: 8/3;
   display: flex;
   justify-content: center;
   font-weight: 500;
+  font-size: 15px;
   text-transform: uppercase;
   cursor: pointer;
+  border: 4px solid transparent;
 }
 form #challenge .choice label:has(input:checked) {
-  border: 4px solid #ff5151;
+  border-color: var(--error);
 }
-form #challenge .choice label:nth-child(3):has(input:checked) {
-  border: 4px solid #4caf50;
+form #challenge .choice label.correct:has(input:checked) {
+  border-color: var(--success);
 }
 form #challenge .choice label input {
   display: none;
 }
-form .buttons {
+form .results {
   display: flex;
-  justify-content: flex-end;
+  transition: 0.2s ease, 0.15s opacity;
+  will-change: height, opacity, margin;
 }
-form .buttons :where(button) {
-  width: 140px;
-  padding: 10px 0;
-  font-family: inherit;
-  border: 1px solid rgba(var(--fg-color), 0.2);
-  background-color: rgba(var(--fg-color), 0.01);
-  color: rgba(var(--fg-color), 0.8);
-  cursor: pointer;
-  font-size: 14px;
+form .results > div {
+  flex: 1;
+  border: 1px solid rgb(var(--fg-color), 0.1);
+  padding: 12px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color);
+  display: none;
   font-weight: 450;
-  overflow: hidden;
-  transition: 0.2s background-color;
-}
-form .buttons :where(button):hover {
-  background: rgba(var(--fg-color), 0.03);
-  color: rgba(var(--fg-color), 1);
 }/*# sourceMappingURL=main.css.map */
