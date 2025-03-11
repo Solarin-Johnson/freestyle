@@ -110,8 +110,9 @@ section:hover form {
 }
 
 form {
-  opacity: 0.6;
+  opacity: 0.5;
   transform-style: preserve-3d;
+  transform: rotateX(0deg);
   transition: 0.3s ease, 0.15s opacity;
   will-change: height, opacity, margin;
 }
@@ -188,8 +189,12 @@ form fieldset label span {
   flex: 1;
 }
 form fieldset label span,
-form fieldset label span svg {
+form fieldset label svg {
   opacity: 0.8;
+}
+form fieldset label svg {
+  width: 28px;
+  height: 28px;
 }
 form #challenge {
   flex-direction: column;
@@ -222,7 +227,7 @@ form #challenge .choice {
 form #challenge .choice label {
   border: none;
   background-color: rgb(var(--fg-color), 0.02);
-  aspect-ratio: 8/3;
+  aspect-ratio: 9/3;
   display: flex;
   justify-content: center;
   font-weight: 500;

@@ -166,8 +166,9 @@ section {
 }
 
 form {
-  opacity: 0.6;
+  opacity: 0.5;
   transform-style: preserve-3d;
+  transform: rotateX(0deg);
   @include transition-config();
 
   &:where(:not(:has(input:checked))) {
@@ -240,11 +241,14 @@ form {
 
       span {
         flex: 1;
-
-        &,
-        svg {
-          opacity: 0.8;
-        }
+      }
+      span,
+      svg {
+        opacity: 0.8;
+      }
+      svg {
+        width: 28px;
+        height: 28px;
       }
     }
   }
@@ -283,7 +287,7 @@ form {
       label {
         border: none;
         background-color: rgb(var(--fg-color), 0.02);
-        aspect-ratio: 8/3;
+        aspect-ratio: 9/3;
         display: flex;
         justify-content: center;
         font-weight: 500;
