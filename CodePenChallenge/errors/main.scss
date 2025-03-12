@@ -285,7 +285,6 @@ form {
       grid-template-columns: repeat(2, 1fr);
 
       label {
-        border: none;
         background-color: rgb(var(--fg-color), 0.02);
         aspect-ratio: 9/3;
         display: flex;
@@ -295,6 +294,8 @@ form {
         text-transform: uppercase;
         cursor: pointer;
         border: 4px solid transparent;
+        height: fit-content;
+        box-sizing: border-box;
 
         &:has(input:checked) {
           border-color: var(--error);

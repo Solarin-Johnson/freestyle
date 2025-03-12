@@ -225,7 +225,6 @@ form #challenge .choice {
   grid-template-columns: repeat(2, 1fr);
 }
 form #challenge .choice label {
-  border: none;
   background-color: rgb(var(--fg-color), 0.02);
   aspect-ratio: 9/3;
   display: flex;
@@ -235,6 +234,9 @@ form #challenge .choice label {
   text-transform: uppercase;
   cursor: pointer;
   border: 4px solid transparent;
+  height: -moz-fit-content;
+  height: fit-content;
+  box-sizing: border-box;
 }
 form #challenge .choice label:has(input:checked) {
   border-color: var(--error);
